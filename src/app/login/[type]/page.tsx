@@ -2,9 +2,8 @@ import Image from "next/image";
 import LoginForm from "../../components/LoginForm";
 import Link from "next/link";
 
-// Convert the page component to an async function (No need to await params)
 const Page = ({ params }: { params: { type: string } }) => {
-  const { type } = params; // No need to await here
+  const { type } = params;
 
   const normalizeType = (type: string) => {
     return (

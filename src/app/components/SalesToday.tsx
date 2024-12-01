@@ -15,6 +15,7 @@ const SalesToday = ({ sales }: { sales: SaleProps }) => {
     label: string,
     yesterdayValue: number | null
   ) => {
+    const isCurrency = label === "Total Sales"; // Add peso sign only for Total Sales
     const percentageChange = yesterdayValue
       ? `${(
           ((value - yesterdayValue) / Math.abs(yesterdayValue)) *
@@ -23,7 +24,11 @@ const SalesToday = ({ sales }: { sales: SaleProps }) => {
       : "No sales data for yesterday";
     return (
       <div className="bg-white rounded-2xl p-2 mt-2">
-        <h1 className="font-bold text-base">₱{value.toLocaleString()}.00</h1>
+        <h1 className="font-bold text-base">
+          {isCurrency
+            ? `₱${value.toLocaleString()}.00`
+            : value.toLocaleString()}
+        </h1>
         <h2 className="font-semibold text-sm">{label}</h2>
         <p className="text-xs">{percentageChange}</p>
       </div>

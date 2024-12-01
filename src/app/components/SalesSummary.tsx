@@ -41,7 +41,7 @@ const SalesSummary = ({ sales }: { sales: SaleProps }) => {
     lastPeriod: number
   ) => (
     <div className="flex flex-row justify-between my-4">
-      <h1 className="text-base font-bold">{label}</h1>
+      <h1 className="text-base font-bold">{`Total ${label}ly Sales`}</h1>
       <div className="flex flex-row items-center gap-2 w-36">
         {renderComparisonIcon(thisPeriod, lastPeriod)}
         <div>

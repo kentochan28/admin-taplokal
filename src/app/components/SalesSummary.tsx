@@ -58,11 +58,11 @@ const SalesSummary = ({ sales }: { sales: SaleProps }) => {
 
   return (
     <div>
-      {renderPeriod("Sales", thisWeekSales, lastWeekSales)}
+      {renderPeriod("Week", thisWeekSales, lastWeekSales)}
       <hr />
-      {renderPeriod("Sales", thisMonthSales, lastMonthSales)}
+      {renderPeriod("Month", thisMonthSales, lastMonthSales)}
       <hr />
-      {renderPeriod("Sales", thisYearSales, lastYearSales)}
+      {renderPeriod("Year", thisYearSales, lastYearSales)}
     </div>
   );
 };

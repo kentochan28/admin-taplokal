@@ -6,6 +6,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Sales from "./Sales";
+import SalesReport from "./SalesReport"; // Import SalesReport component
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -60,46 +61,82 @@ const Page = () => {
     <div className="flex flex-col lg:flex-row w-full h-screen">
       {/* Sidebar */}
       <div
-        className={`lg:w-1/5 w-full lg:h-screen flex flex-col justify-between bg-background fixed lg:relative transition-all ${
+        className={`lg:w-1/5 w-full lg:h-screen flex flex-col justify-between bg-background fixed lg:relative transition-all z-20 ${
           isSidebarOpen ? "translate-x-0" : "-translate-x-full"
         } lg:translate-x-0`}
       >
-        <div className="flex flex-col gap-4 items-center p-4">
+        <div className="flex flex-col gap-6 items-center p-6">
           <Image
             src="/icon.png"
             width={100}
             height={100}
             alt="logo"
-            className="mb-5"
+            className="mb-6"
           />
-          <Link
-            href={"/super%20admin"}
-            className={`flex items-center w-full gap-5 cursor-pointer p-3 rounded-xl ${
-              currentPage === "sales"
-                ? "bg-foreground/10"
-                : "hover:bg-foreground/10"
-            }`}
-            onClick={() => handlePageChange("sales")}
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="size-8"
-              stroke="currentColor"
+
+          <nav className="w-full">
+            <Link
+              href={"/super%20admin"}
+              className={`flex items-center w-full gap-5 cursor-pointer p-3 rounded-xl ${
+                currentPage === "sales"
+                  ? "bg-foreground/10"
+                  : "hover:bg-foreground/10"
+              }`}
+              onClick={() => {
+                handlePageChange("sales");
+                if (window.innerWidth <= 1024) toggleSidebar(); // Close sidebar on mobile
+              }}
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
-              />
-            </svg>
-            <h1 className="font-semibold">Sales</h1>
-          </Link>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5M9 11.25v1.5M12 9v3.75m3-6v6"
+                />
+              </svg>
+              <h1 className="font-semibold">Sales</h1>
+            </Link>
+
+            <Link
+              href={"/super%20admin"}
+              className={`flex items-center w-full gap-5 cursor-pointer p-3 rounded-xl ${
+                currentPage === "salesreport"
+                  ? "bg-foreground/10"
+                  : "hover:bg-foreground/10"
+              }`}
+              onClick={() => {
+                handlePageChange("salesreport");
+                if (window.innerWidth <= 1024) toggleSidebar(); // Close sidebar on mobile
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="w-6 h-6"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                fill="none"
+                strokeWidth="2"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M3 17v4h4v-4H3zM7 3v14h4V3H7zM11 7v10h4V7h-4zM15 12v5h4v-5h-4z"
+                />
+              </svg>
+              <h1 className="font-semibold">Report</h1>
+            </Link>
+          </nav>
         </div>
-        <div className="p-4">
-          <div className="flex items-center gap-2 mb-4">
+
+        <div className="p-6">
+          <div className="flex items-center gap-3 mb-6">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="size-10"
+              className="w-8 h-8"
               stroke="currentColor"
             >
               <path
@@ -123,16 +160,23 @@ const Page = () => {
       </div>
 
       {/* Main Content */}
-      <div className="lg:w-4/5 w-full p-4 h-screen overflow-y-scroll bg-lightBackground">
-        {/* Hamburger Button positioned to the top-right */}
+      <div
+        className={`lg:w-4/5 w-full p-6 h-screen overflow-y-scroll bg-lightBackground relative ${
+          isSidebarOpen ? "z-10" : ""
+        }`}
+      >
+        {/* Mobile Hamburger Icon */}
         <button
-          className="lg:hidden absolute top-4 right-4 text-2xl"
+          className="lg:hidden absolute top-4 right-4 text-2xl z-30"
           onClick={toggleSidebar}
+          style={{ zIndex: 30 }} // Ensure the hamburger icon is above other content
         >
           ☰
         </button>
+
         <Suspense fallback={<div>Loading...</div>}>
           {currentPage === "sales" && <Sales />}
+          {currentPage === "salesreport" && <SalesReport />}
         </Suspense>
       </div>
     </div>

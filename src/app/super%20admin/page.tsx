@@ -6,7 +6,6 @@ import { onAuthStateChanged } from "firebase/auth";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Sales from "./Sales";
-import SalesReport from "./SalesReport"; // Import SalesReport component
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
@@ -100,35 +99,6 @@ const Page = () => {
               </svg>
               <h1 className="font-semibold">Sales</h1>
             </Link>
-
-            <Link
-              href={"/super%20admin"}
-              className={`flex items-center w-full gap-5 cursor-pointer p-3 rounded-xl ${
-                currentPage === "salesreport"
-                  ? "bg-foreground/10"
-                  : "hover:bg-foreground/10"
-              }`}
-              onClick={() => {
-                handlePageChange("salesreport");
-                if (window.innerWidth <= 1024) toggleSidebar(); // Close sidebar on mobile
-              }}
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="w-6 h-6"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                fill="none"
-                strokeWidth="2"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 17v4h4v-4H3zM7 3v14h4V3H7zM11 7v10h4V7h-4zM15 12v5h4v-5h-4z"
-                />
-              </svg>
-              <h1 className="font-semibold">Report</h1>
-            </Link>
           </nav>
         </div>
 
@@ -176,7 +146,6 @@ const Page = () => {
 
         <Suspense fallback={<div>Loading...</div>}>
           {currentPage === "sales" && <Sales />}
-          {currentPage === "salesreport" && <SalesReport />}
         </Suspense>
       </div>
     </div>

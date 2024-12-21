@@ -19,6 +19,7 @@ export interface ItemCart {
 }
 
 export interface CartDetails {
+  id: string;
   branch: string;
   cartId: string;
   createdAt: Timestamp;
@@ -28,6 +29,7 @@ export interface CartDetails {
   orderNumber: number;
   status: string;
   tableNumber: number;
+  totalDiscount?: number;
 }
 
 export interface MenuItemProps {

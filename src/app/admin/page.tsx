@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import Stock from "./Stock";
 import AddMenu from "./AddMenu";
 import Users from "./Users";
+import History from "./History";
 
 const Page = () => {
   const router = useRouter();
@@ -159,6 +160,39 @@ const Page = () => {
               </svg>
               <h1 className="font-semibold">Users</h1>
             </div>
+
+            {/* History */}
+            <div
+              onClick={() => handlePageChange("history")}
+              className={`flex items-center w-full gap-4 cursor-pointer p-2 rounded-xl ${
+                currentPage === "history" ? "bg-gray-200" : "hover:bg-gray-100"
+              }`}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={1.5}
+                stroke="currentColor"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M5 13l4 4L19 7"
+                />
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="10"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  fill="none"
+                />
+              </svg>
+
+              <h1 className="font-semibold">Completed Orders</h1>
+            </div>
           </div>
           {/* Logout */}
           <div className="p-4">
@@ -194,6 +228,7 @@ const Page = () => {
 
       {/* Main Content */}
       <div className="w-full lg:w-4/5 p-4 h-screen overflow-y-scroll">
+        {currentPage === "history" && <History />}
         {currentPage === "addmenu" && <AddMenu />}
         {currentPage === "stocks" && <Stock />}
         {currentPage === "users" && <Users />}

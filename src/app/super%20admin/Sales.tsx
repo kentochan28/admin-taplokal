@@ -154,7 +154,7 @@ const Sales = () => {
             <button
               key={period}
               onClick={() => generateReportForPeriod(period)}
-              className="py-3 px-6 rounded-full w-full sm:w-auto transition-transform transform hover:scale-105 text-white font-medium shadow-md bg-gray-600 hover:bg-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="py-3 px-6 rounded-full w-full sm:w-auto transition-transform transform hover:scale-105 text-white font-medium shadow-md bg-foreground hover:bg-foreground focus:outline-none "
               aria-label={`${period} Sales Report`}
             >
               Download {period} Report
